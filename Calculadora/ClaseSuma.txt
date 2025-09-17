@@ -1,0 +1,143 @@
+//ClaseSuma
+public class Suma {
+
+    private Numero numero1;
+    private Numero numero2;
+
+    public Suma() {
+    }
+
+    public Suma(Numero numero1, Numero numero2) {
+        this.numero1 = numero1;
+        this.numero2 = numero2;
+    }
+
+    public Numero sumar(){
+        int resultado = numero1.getNumero()+numero2.getNumero();
+        return new Numero(resultado);
+    }
+
+}
+
+//claseNumero
+public class Numero {
+    private int numero;
+
+    public Numero(){
+    }
+
+    public Numero(int numero){
+    this.numero = numero;
+    }
+    
+
+    //
+    public int getNumero() {
+    return numero;
+    }
+
+    public void setNumero(int numero) {
+    this.numero = numero;
+    }
+
+}
+
+//AppSuma
+import java.util.Scanner;
+
+public class AppSuma{
+  public static void main(String[] args) throws Exception {
+    Scanner teclado = new Scanner(System.in);
+
+    System.out.print ("digite un numero:");
+    int n1 = teclado.nextInt();
+
+    System.out.print ("digite un numero:");
+    int n2 = teclado.nextInt();
+
+    Numero numero1 = new Numero(n1);
+    Numero numero2 = new Numero(n2);
+    
+    Suma resultado = new Suma(numero1, numero2);
+
+    Numero suma = resultado.sumar();
+
+    System.out.printf("%d + %d = %d", numero1.getNumero(), numero2.getNumero(), suma.getNumero() );
+    
+    teclado.close();
+  }
+}
+
+//clase vista menu
+public class Vista {
+
+public void escribirNumero(){
+    System.out.println("Escriba un entero: ");
+    
+    }
+
+public void escribirSalida(Numero resultado1){
+    System.out.printf("La suma es: " + resultado1.getNumero());
+    }
+
+public void mostrarMenu(){
+    System.out.println("\n--- Menu de Suma ---");
+    System.out.println("1. Analizar una suma");
+    System.out.println("2. Salir");
+    System.out.print("Seleccione una opcion: ");
+    }
+    
+public void salirPrograma(){
+    System.out.println("Saliendo de la aplicacion...");
+    }
+
+public void mostrarDefault(){
+    System.out.println("Opcion no valida. Por Favor, intente de nuevo. Solo 1 o 2");
+    }
+}
+
+//AppSumaMenu
+import java.util.Scanner;
+
+public class AppSuma{
+  public static void main(String[] args) throws Exception {
+
+    Scanner entrada = new Scanner(System.in);
+    
+    Vista vista = new Vista();
+
+    int opcion;
+
+
+    do { 
+      vista.mostrarMenu();
+      opcion = entrada.nextInt();
+
+      switch (opcion){
+        case 1:
+        vista.escribirNumero();
+        int n1 = entrada.nextInt();
+        vista.escribirNumero();
+        int n2 = entrada.nextInt();
+
+
+        Numero numero1 = new Numero(n1);
+        Numero numero2 = new Numero(n2);
+
+        Suma suma = new Suma(numero1, numero2);
+        Numero resulta = suma.sumar();
+
+        vista.escribirSalida(resulta);
+        break;
+      case 2:
+        vista.salirPrograma();
+        break;
+      default:
+      vista.mostrarDefault();
+      }
+    } while (opcion !=2);
+
+    entrada.close();
+    
+}
+}
